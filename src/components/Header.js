@@ -227,7 +227,7 @@ const HeaderStyled = styled.header`
     }
     .insta,
     .fb {
-      height: 12vw;
+      height: 12vh;
       width: auto;
       
       display: flex;

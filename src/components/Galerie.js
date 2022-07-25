@@ -24,6 +24,8 @@ const Galerie = ({ listImg, catState, categories, setCatState, loaded }) => {
   const [startX, setStartX] = useState()
   const [scrollLeft, setScrollLeft] = useState()
   
+  
+
   const imgRef = useRef()
   const [imgRefHeight, setImgRefHeight] = useState(false)
 
@@ -142,6 +144,15 @@ const Galerie = ({ listImg, catState, categories, setCatState, loaded }) => {
     const walk = (x - startX) * 2;
     imgContainer.current.scrollTop = scrollLeft - walk
   }
+  const fullscreenHandler = (e, ref) => {
+    e.preventDefault()
+    
+    if (document.fullscreenElement) {
+      document.exitFullscreen()
+    } else {
+      ref.requestFullscreen()
+    }
+  }
   return (
     <>
       {loaded && categories && finalList ? (
@@ -194,6 +205,7 @@ const Galerie = ({ listImg, catState, categories, setCatState, loaded }) => {
                           alt="img"
                           key={i}
                           ref={(el) => (listRef.current[i] = el)}
+                          onClick={(e) => fullscreenHandler(e, listRef.current[i])}
                         />
                       </div>
                     </div>

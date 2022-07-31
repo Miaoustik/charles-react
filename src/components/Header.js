@@ -227,7 +227,8 @@ const HeaderStyled = styled.header`
     }
     .insta,
     .fb {
-      height: 12vh;
+      height: 20%;
+     
       width: auto;
       
       display: flex;
@@ -237,14 +238,16 @@ const HeaderStyled = styled.header`
     .insta svg,
     .fb svg {
       
-      height: 100%;
-      width: 100%;
+      height: 6vh;
+      width: 6vh;
     }
     .link {
       width: 100%;
       font-size: 5vh;
       text-align: center;
-      margin: 0;      
+      margin: 0;  
+      line-height: 100%;
+      height: 20%;    
     }
     .container {
       
@@ -275,8 +278,8 @@ const HeaderStyled = styled.header`
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 2vw;
-      margin: 1vh 0;
+     
+      
     }
 
     .link,

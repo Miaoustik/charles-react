@@ -10,6 +10,7 @@ import instance from "./helpers/instance";
 import { useEffect, useState } from "react";
 import Loading from "./components/Loading";
 
+
 function App() {
   const [listImg, setListImg] = useState([]);
   const [catState, setCatState] = useState({});
@@ -209,6 +210,7 @@ function App() {
               element={<Contact loaded={loaded} contactState={contactState} />}
             />
           </Routes>
+          
         </AppStyled>
       ) : (
         <Loading />
@@ -218,8 +220,8 @@ function App() {
 }
 
 const AppStyled = styled.div`
-  height: 100%;
-  width: 100%;
+  height: 100vh;
+  width: 100vw;
 
   scrollbar-width: 0;
 `;

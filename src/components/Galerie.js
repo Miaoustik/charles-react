@@ -6,6 +6,7 @@ import {
   faAngleDoubleRight,
 } from "@fortawesome/free-solid-svg-icons";
 import Loading from "./Loading";
+import Footer from "./Footer";
 
 const Galerie = ({ listImg, catState, categories, setCatState, loaded }) => {
   const [finalList, setFinalList] = useState([]);
@@ -129,7 +130,7 @@ const Galerie = ({ listImg, catState, categories, setCatState, loaded }) => {
   
   
   const handleMousedown = (e , imgContainer) => {
-    console.log(imgContainer.current.scrollTop)
+    
     const dimensions = imgContainer.current.getBoundingClientRect()
     setIsDown(true)
     setStartX(e.pageY - dimensions.top)
@@ -224,6 +225,7 @@ const Galerie = ({ listImg, catState, categories, setCatState, loaded }) => {
               </button>}
             </div>
           </div>
+          <Footer />
         </GalerieStyled>
       ) : (
         <Loading />
@@ -233,7 +235,15 @@ const Galerie = ({ listImg, catState, categories, setCatState, loaded }) => {
 };                                                          
 
 const GalerieStyled = styled.main`
- 
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    width: 0;
+  }
+  .list {
+    &::-webkit-scrollbar {
+    width: 0;
+  }
+  }
   @media screen and (max-width: 1000px) {
     
     .child-img, .child-container, .img-container {
@@ -250,10 +260,13 @@ const GalerieStyled = styled.main`
       position: absolute;
       z-index: 2;
       height: ${props => props.imgRef !== false ? `${props.imgRefHeight}px` : '100%' };
-      max-width: 400px;
+      max-width: 200px;
     }
     .list {
       overflow: hidden;
+    }
+    h2, .list li {
+      padding-left: 40px;
     }
     .arrow , .arrow-btn {
      
@@ -319,8 +332,8 @@ const GalerieStyled = styled.main`
       height: 2px;
       width: 12px;
       position: relative;
-      top: 5.2px;
-      right: 2px;
+      top: 5.5px;
+      right: 2.5px;
       /* left: 20px; */
       background: white;
     }
@@ -366,7 +379,7 @@ const GalerieStyled = styled.main`
     }
     
     .categories {
-      font-size: 3vw;
+      font-size: 6vh;
     }
     .list {
       overflow: auto;

@@ -1,12 +1,15 @@
 import React from "react";
 import styled from "styled-components/macro";
+import Footer from "./Footer";
 
 
-const Home = ({loaded, img}) => {
+const Home = ({ loaded, img }) => {
 
   return (
     <>
-      {loaded === true ? <HomeStyled img={img}>
+      {loaded === true ? 
+      <>
+      <HomeStyled img={img}>
         <div className="img">
         <svg
           width="322.52"
@@ -132,7 +135,9 @@ const Home = ({loaded, img}) => {
           />
         </svg>
         </div>
-      </HomeStyled> : <p>Loading</p>}
+      <Footer className='footer'/>
+      </HomeStyled>
+      </> : <p>Loading</p>}
     </>
   )
 };
@@ -144,6 +149,11 @@ const HomeStyled = styled.main`
   position: absolute;
   padding: 0;
   margin: 0;
+  overflow: scroll;
+  overflow-x: hidden;
+  &::-webkit-scrollbar {
+    width: 0;
+  }
   @media screen and (max-width: 700px) {
     .svg {
       animation: none;
@@ -202,6 +212,10 @@ const HomeStyled = styled.main`
     100% {
       transform: scale(1);
     }
+  }
+  .footer {
+    position: relative;
+    top: 100vh;
   }
 `;
 

@@ -3,6 +3,7 @@ import styled from "styled-components/macro";
 
 import { useForm, ValidationError } from "@formspree/react";
 import Loading from "./Loading";
+import Footer from "./Footer";
 
 const Contact = ({ contactState, loaded }) => {
   const [state, handleSubmit, reset] = useForm("moqrogpo");
@@ -32,155 +33,161 @@ const Contact = ({ contactState, loaded }) => {
         const timer2 = setTimeout(() => {
           setShowSuccess(false);
           return clearTimeout(timer2);
-        }, 3000);
+        }, 5000);
         return clearTimeout(timer);
-      }, 3000);
+      }, 5000);
     }
   }, [showSuccess]);
   return (
     <>
       {loaded ? (
         <ContactStyled showSuccess={showSuccess} fade={fade}>
-          <div className="left-container">
-            <h2 className="title">{contactState.text}</h2>
-            <img src={contactState.img} alt="img" className="img" />
-          </div>
+          <div className="main-container">
+            <div className="left-container">
+              <h2 className="title">{contactState.text}</h2>
+              <img src={contactState.img} alt="img" className="img" />
+            </div>
 
-          <div className="form-container">
-            <form className="form" onSubmit={handleSubmit}>
-              <label className="label" htmlFor="name">
-                Nom :
-              </label>
-              <input
-                className="input"
-                type="text"
-                placeholder="Votre nom..."
-                name="name"
-                id="name"
-                onChange={(e) =>
-                  setInputs({ ...inputs, nameInput: e.target.value })
-                }
-                value={inputs.nameInput}
-                required
-              />
-              <ValidationError
-                prefix="Name"
-                field="name"
-                errors={state.errors}
-              />
+            <div className="form-container">
+              <form className="form" onSubmit={handleSubmit}>
+                <label className="label" htmlFor="name">
+                  Nom :
+                </label>
+                <input
+                  className="input"
+                  type="text"
+                  placeholder="Votre nom..."
+                  name="name"
+                  id="name"
+                  onChange={(e) =>
+                    setInputs({ ...inputs, nameInput: e.target.value })
+                  }
+                  value={inputs.nameInput}
+                  required
+                />
+                <ValidationError
+                  prefix="Name"
+                  field="name"
+                  errors={state.errors}
+                />
 
-              <label className="label" htmlFor="email">
-                E-mail :
-              </label>
-              <input
-                className="input"
-                type="text"
-                placeholder="Votre e-mail..."
-                name="email"
-                id="email"
-                onChange={(e) =>
-                  setInputs({ ...inputs, emailInput: e.target.value })
-                }
-                value={inputs.emailInput}
-                required
-              />
-              <ValidationError
-                prefix="Email"
-                field="email"
-                errors={state.errors}
-              />
+                <label className="label" htmlFor="email">
+                  E-mail :
+                </label>
+                <input
+                  className="input"
+                  type="text"
+                  placeholder="Votre e-mail..."
+                  name="email"
+                  id="email"
+                  onChange={(e) =>
+                    setInputs({ ...inputs, emailInput: e.target.value })
+                  }
+                  value={inputs.emailInput}
+                  required
+                />
+                <ValidationError
+                  prefix="Email"
+                  field="email"
+                  errors={state.errors}
+                />
 
-              <label className="label" htmlFor="message">
-                Message :
-              </label>
-              <textarea
-                className="input message"
-                type="text"
-                placeholder="Votre message..."
-                name="message"
-                id="message"
-                onChange={(e) =>
-                  setInputs({ ...inputs, messageInput: e.target.value })
-                }
-                value={inputs.messageInput}
-                required
-              />
-              <ValidationError
-                prefix="Message"
-                field="message"
-                errors={state.errors}
-              />
+                <label className="label" htmlFor="message">
+                  Message :
+                </label>
+                <textarea
+                  className="input message"
+                  type="text"
+                  placeholder="Votre message..."
+                  name="message"
+                  id="message"
+                  onChange={(e) =>
+                    setInputs({ ...inputs, messageInput: e.target.value })
+                  }
+                  value={inputs.messageInput}
+                  required
+                />
+                <ValidationError
+                  prefix="Message"
+                  field="message"
+                  errors={state.errors}
+                />
 
-              <button className="button">Envoyer</button>
-            </form>
-            {showSuccess && (
-              <div className="success">
-                <div className="success-div">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="svg"
-                    version="1.1"
-                    width="156"
-                    height="156"
-                    viewBox="0 0 256 256"
-                  >
-                    <g transform="translate(128 128) scale(0.5 0.5)">
-                      <g
-                        style={{
-                          stroke: "none",
-                          strokeWidth: 0,
-                          strokeDasharray: "none",
-                          strokeLinecap: "butt",
-                          strokeLinejoin: "miter",
-                          strokeMiterlimit: 10,
-                          fill: "none",
-                          fillRule: "nonzero",
-                          opacity: 1,
-                        }}
-                        transform="translate(-255.15 -255.15000000000006) scale(5.67 5.67)"
-                      >
-                        <path
-                          d="M 89.328 2.625 L 89.328 2.625 c -1.701 -2.859 -5.728 -3.151 -7.824 -0.568 L 46.532 45.173 c -0.856 1.055 -2.483 0.997 -3.262 -0.115 l -8.382 -11.97 c -2.852 -4.073 -8.789 -4.335 -11.989 -0.531 l 0 0 c -2.207 2.624 -2.374 6.403 -0.408 9.211 l 17.157 24.502 c 2.088 2.982 6.507 2.977 8.588 -0.011 l 4.925 -7.07 L 89.135 7.813 C 90.214 6.272 90.289 4.242 89.328 2.625 z"
+                <button className="button">Envoyer</button>
+              </form>
+              {showSuccess && (
+                <div className="success">
+                  <div className="success-div">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="svg"
+                      version="1.1"
+                      width="156"
+                      height="156"
+                      viewBox="0 0 256 256"
+                    >
+                      <g transform="translate(128 128) scale(0.5 0.5)">
+                        <g
                           style={{
                             stroke: "none",
-                            strokeWidth: 1,
+                            strokeWidth: 0,
                             strokeDasharray: "none",
                             strokeLinecap: "butt",
                             strokeLinejoin: "miter",
                             strokeMiterlimit: 10,
-                            fill: "#FFF",
+                            fill: "none",
                             fillRule: "nonzero",
                             opacity: 1,
                           }}
-                          transform=" matrix(1 0 0 1 0 0) "
-                          strokeLinecap="round"
-                        />
-                        <path
-                          d="M 45 90 C 20.187 90 0 69.813 0 45 C 0 20.187 20.187 0 45 0 c 6.072 0 11.967 1.19 17.518 3.538 c 2.034 0.861 2.986 3.208 2.125 5.242 c -0.859 2.035 -3.207 2.987 -5.242 2.126 C 54.842 8.978 49.996 8 45 8 C 24.598 8 8 24.598 8 45 c 0 20.402 16.598 37 37 37 c 20.402 0 37 -16.598 37 -37 c 0 -3.248 -0.42 -6.469 -1.249 -9.573 c -0.57 -2.134 0.698 -4.327 2.832 -4.897 c 2.133 -0.571 4.326 0.698 4.896 2.833 C 89.488 37.14 90 41.055 90 45 C 90 69.813 69.813 90 45 90 z"
-                          style={{
-                            stroke: "none",
-                            strokeWidth: 1,
-                            strokeDasharray: "none",
-                            strokeLinecap: "butt",
-                            strokeLinejoin: "miter",
-                            strokeMiterlimit: 10,
-                            fill: "#FFF",
-                            fillRule: "nonzero",
-                            opacity: 1,
-                          }}
-                          transform=" matrix(1 0 0 1 0 0) "
-                          strokeLinecap="round"
-                        />
+                          transform="translate(-255.15 -255.15000000000006) scale(5.67 5.67)"
+                        >
+                          <path
+                            d="M 89.328 2.625 L 89.328 2.625 c -1.701 -2.859 -5.728 -3.151 -7.824 -0.568 L 46.532 45.173 c -0.856 1.055 -2.483 0.997 -3.262 -0.115 l -8.382 -11.97 c -2.852 -4.073 -8.789 -4.335 -11.989 -0.531 l 0 0 c -2.207 2.624 -2.374 6.403 -0.408 9.211 l 17.157 24.502 c 2.088 2.982 6.507 2.977 8.588 -0.011 l 4.925 -7.07 L 89.135 7.813 C 90.214 6.272 90.289 4.242 89.328 2.625 z"
+                            style={{
+                              stroke: "none",
+                              strokeWidth: 1,
+                              strokeDasharray: "none",
+                              strokeLinecap: "butt",
+                              strokeLinejoin: "miter",
+                              strokeMiterlimit: 10,
+                              fill: "#FFF",
+                              fillRule: "nonzero",
+                              opacity: 1,
+                            }}
+                            transform=" matrix(1 0 0 1 0 0) "
+                            strokeLinecap="round"
+                          />
+                          <path
+                            d="M 45 90 C 20.187 90 0 69.813 0 45 C 0 20.187 20.187 0 45 0 c 6.072 0 11.967 1.19 17.518 3.538 c 2.034 0.861 2.986 3.208 2.125 5.242 c -0.859 2.035 -3.207 2.987 -5.242 2.126 C 54.842 8.978 49.996 8 45 8 C 24.598 8 8 24.598 8 45 c 0 20.402 16.598 37 37 37 c 20.402 0 37 -16.598 37 -37 c 0 -3.248 -0.42 -6.469 -1.249 -9.573 c -0.57 -2.134 0.698 -4.327 2.832 -4.897 c 2.133 -0.571 4.326 0.698 4.896 2.833 C 89.488 37.14 90 41.055 90 45 C 90 69.813 69.813 90 45 90 z"
+                            style={{
+                              stroke: "none",
+                              strokeWidth: 1,
+                              strokeDasharray: "none",
+                              strokeLinecap: "butt",
+                              strokeLinejoin: "miter",
+                              strokeMiterlimit: 10,
+                              fill: "#FFF",
+                              fillRule: "nonzero",
+                              opacity: 1,
+                            }}
+                            transform=" matrix(1 0 0 1 0 0) "
+                            strokeLinecap="round"
+                          />
+                        </g>
                       </g>
-                    </g>
-                  </svg>
+                    </svg>
+                  </div>
+                  <p className="success-p">
+                    Message envoyé, merci de nous avoir contacté.
+                    <br />
+                    Nous répondrons dans les plus brefs délais.
+                  </p>
                 </div>
-                <p className="success-p">
-                  Message envoyé, merci de nous avoir contacté
-                </p>
-              </div>
-            )}
+              )}
+            </div>
           </div>
+
+          <Footer />
         </ContactStyled>
       ) : (
         <Loading />
@@ -190,20 +197,29 @@ const Contact = ({ contactState, loaded }) => {
 };
 
 const ContactStyled = styled.main`
-  display: flex;
   height: calc(100vh - 15%);
-  
-  
-  @media screen and (min-width: 1300px) {
-    overflow-x: hidden;
-    justify-content: center;
-    align-items: flex-start;
+  overflow: scroll;
+  &::-webkit-scrollbar {
+    width: 0;
+  }
+  .main-container {
+    display: flex;
+    justify-content: stretch;
+  }
 
+  @media screen and (min-width: 1300px) {
+    .main-container {
+      overflow-x: hidden;
+      justify-content: center;
+      align-items: flex-start;
+    }
   }
   @media screen and (max-width: 1300px) {
-    flex-direction: column;
-    overflow: scroll;
-    padding-top: 10px;
+    .main-container {
+      flex-direction: column;
+      overflow: scroll;
+      padding-top: 10px;
+    }
 
     .left-container {
       display: none;
@@ -223,7 +239,6 @@ const ContactStyled = styled.main`
     }
   }
   @media screen and (min-width: 1300px) {
-    
     .form-container {
       width: 586px;
       position: relative;
@@ -233,7 +248,6 @@ const ContactStyled = styled.main`
   @media screen and (max-width: 700px) {
     .form-container {
       width: 100vw;
-      
     }
     .form {
       width: 100vw;
@@ -250,11 +264,10 @@ const ContactStyled = styled.main`
   }
   @media screen and (min-width: 600px) {
     .input,
-  .label {
-    margin-left: 46px;
+    .label {
+      margin-left: 46px;
+    }
   }
-  }
-
 
   .svg {
     color: white;
@@ -279,6 +292,7 @@ const ContactStyled = styled.main`
     width: 40%;
     margin: 20px 0;
     margin-left: 46px;
+    margin-bottom: 40px;
     border: none;
     border-radius: 10px;
     font-size: 18px;
@@ -323,7 +337,7 @@ const ContactStyled = styled.main`
   .success {
     box-shadow: 4px 4px 4px 0px #00000060;
   }
-  
+
   .label {
     color: white;
     margin-top: 52px;

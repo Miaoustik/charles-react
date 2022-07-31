@@ -610,7 +610,7 @@ const GalerieStyled = styled.main`
   @media (hover: hover) {
     .categorie:hover {
       text-decoration: underline;
-      transform: scale(150%);
+      transform: scale(120%);
     }
   }
 

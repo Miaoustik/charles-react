@@ -1,0 +1,8 @@
+Chartes graphique: 
+    Color: 
+        backgroung-color:  #47555e 
+        text-color: white, black
+
+    Typographie:
+        font-family: Baloo Da 2
+        font-size: 19px

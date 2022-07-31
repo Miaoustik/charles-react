@@ -1,3 +1,28 @@
+Lien du serveur de l'app React : https://charles-cantin-photographe.herokuapp.com/
+Lien du serveur WordPress contenant les photos et textes: https://wordpress.com/posts/charlescantinphoto.wordpress.com
+
+
+Manuel d'installation: 
+
+    En local: 
+        
+       - installer node.js sur la machine.
+       - créer un dossier et exécuter "npm init -y" a l'intérrieur.
+       - exécuter "git clone https://github.com/Miaoustik/charles-react.git votreDossier/" 
+       - aller dans votreDossier et exécuter npm install.
+       - exécuter npm start pour lancer le serveur.
+
+    En ligne: 
+
+        - S'inscire sur Heroku
+        - Push l'application sur github
+        - lier github a Heroku.
+        - Ajouter https://buildpack-registry.s3.amazonaws.com/buildpacks/mars/create-react-app.tgz dans le      buildpack.
+        -Lancer le déploiement.
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

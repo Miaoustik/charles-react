@@ -19,32 +19,30 @@ const Galerie = ({ listImg, catState, categories, setCatState, loaded }) => {
   const rightButton = useRef();
   const [disableBtn, setDisableBtn] = useState(false);
 
-  const [showCat, setShowCat] = useState(false)
+  const [showCat, setShowCat] = useState(false);
 
-  const [isDown, setIsDown] = useState(false)
-  const [startX, setStartX] = useState()
-  const [scrollLeft, setScrollLeft] = useState()
-  
-  
+  const [isDown, setIsDown] = useState(false);
+  const [startX, setStartX] = useState();
+  const [scrollLeft, setScrollLeft] = useState();
 
-  const imgRef = useRef()
-  const [imgRefHeight, setImgRefHeight] = useState(false)
+  const imgRef = useRef();
+  const [imgRefHeight, setImgRefHeight] = useState(false);
 
   const handleImg = () => {
-    setImgRefHeight(imgRef.current.clientHeight)
-  }
-  
+    setImgRefHeight(imgRef.current.clientHeight);
+  };
+
   useEffect(() => {
-    handleImg()
-    window.addEventListener('resize', handleImg)
-  }, [imgContainer])
+    handleImg();
+    window.addEventListener("resize", handleImg);
+  }, [imgContainer]);
 
   useLayoutEffect(() => {
     return () => {
-      window.removeEventListener('resize', handleImg);
-    }
-  }, [])
-  
+      window.removeEventListener("resize", handleImg);
+    };
+  }, []);
+
   useEffect(() => {
     if (catState !== {} && listImg !== []) {
       let final = [];
@@ -80,8 +78,7 @@ const Galerie = ({ listImg, catState, categories, setCatState, loaded }) => {
     }
   }, [maxList, loaded]);
 
-  
-  const scrollFunct = (numb, listRef, imgContainer, listIncrement ) => {
+  const scrollFunct = (numb, listRef, imgContainer, listIncrement) => {
     if (numb === 1) {
       //Monter
       if (listIncrement === 1) {
@@ -127,42 +124,48 @@ const Galerie = ({ listImg, catState, categories, setCatState, loaded }) => {
       }
     }
   };
-  
-  
-  const handleMousedown = (e , imgContainer) => {
-    
-    const dimensions = imgContainer.current.getBoundingClientRect()
-    setIsDown(true)
-    setStartX(e.pageY - dimensions.top)
-    setScrollLeft(imgContainer.current.scrollTop)
 
-  }
+  const handleMousedown = (e, imgContainer) => {
+    const dimensions = imgContainer.current.getBoundingClientRect();
+    setIsDown(true);
+    setStartX(e.pageY - dimensions.top);
+    setScrollLeft(imgContainer.current.scrollTop);
+  };
   const handleMousemove = (e, imgContainer) => {
-    if (!isDown) return ;
-    const dimensions = imgContainer.current.getBoundingClientRect()
-    e.preventDefault()
-    const x = e.pageY - dimensions.top
+    if (!isDown) return;
+    const dimensions = imgContainer.current.getBoundingClientRect();
+    e.preventDefault();
+    const x = e.pageY - dimensions.top;
     const walk = (x - startX) * 2;
-    imgContainer.current.scrollTop = scrollLeft - walk
-  }
+    imgContainer.current.scrollTop = scrollLeft - walk;
+  };
   const fullscreenHandler = (e, ref) => {
-    e.preventDefault()
-    
+    e.preventDefault();
+
     if (document.fullscreenElement) {
-      document.exitFullscreen()
+      document.exitFullscreen();
     } else {
-      ref.requestFullscreen()
+      ref.requestFullscreen();
     }
-  }
+  };
   return (
     <>
       {loaded && categories && finalList ? (
-        <GalerieStyled listIncrement={listIncrement} maxRef={maxList} showCat={showCat} imgRefHeight={imgRefHeight}>
+        <GalerieStyled
+          listIncrement={listIncrement}
+          maxRef={maxList}
+          showCat={showCat}
+          imgRefHeight={imgRefHeight}
+        >
           <div className="container">
             <div className="sidebar">
-              <button type='button' 
-              onClick={() => setShowCat(!showCat)}
-              className='arrow-btn'><span className="arrow"></span></button>
+              <button
+                type="button"
+                onClick={() => setShowCat(!showCat)}
+                className="arrow-btn"
+              >
+                <span className="arrow"></span>
+              </button>
               <h2 className="categories">Catégories</h2>
 
               <ul className="list">
@@ -186,16 +189,27 @@ const Galerie = ({ listImg, catState, categories, setCatState, loaded }) => {
                 })}
               </ul>
             </div>
-            <div className="img-container"  ref={imgRef}>
-              {<button
-                type="button"
-                className="left-button"
-                ref={leftButton}
-                onClick={() => handleSlider(0, listRef, imgContainer, listIncrement)}
+            <div className="img-container" ref={imgRef}>
+              {
+                <button
+                  type="button"
+                  className="left-button"
+                  ref={leftButton}
+                  onClick={() =>
+                    handleSlider(0, listRef, imgContainer, listIncrement)
+                  }
+                >
+                  <FontAwesomeIcon icon={faAngleDoubleLeft} />
+                </button>
+              }
+              <div
+                className="scroll-img"
+                ref={imgContainer}
+                onMouseDown={(e) => handleMousedown(e, imgContainer)}
+                onMouseUp={() => setIsDown(false)}
+                onMouseMove={(e) => handleMousemove(e, imgContainer)}
+                onMouseLeave={() => setIsDown(false)}
               >
-                <FontAwesomeIcon icon={faAngleDoubleLeft} />
-              </button>}
-              <div className="scroll-img"  ref={imgContainer}  onMouseDown={e => handleMousedown(e, imgContainer)} onMouseUp={() => setIsDown(false)} onMouseMove={(e) => handleMousemove(e, imgContainer)} onMouseLeave={() => setIsDown(false)}>
                 {finalList.map((img, i = 0) => {
                   return (
                     <div className="child" key={i}>
@@ -206,23 +220,27 @@ const Galerie = ({ listImg, catState, categories, setCatState, loaded }) => {
                           alt="img"
                           key={i}
                           ref={(el) => (listRef.current[i] = el)}
-                          onClick={(e) => fullscreenHandler(e, listRef.current[i])}
+                          onClick={(e) =>
+                            fullscreenHandler(e, listRef.current[i])
+                          }
                         />
                       </div>
                     </div>
                   );
                 })}
               </div>
-              {<button
-                type="button"
-                className="right-button"
-                ref={rightButton}
-                onClick={() => {
-                  handleSlider(1, listRef, imgContainer, listIncrement);
-                }}
-              >
-                <FontAwesomeIcon icon={faAngleDoubleRight} />
-              </button>}
+              {
+                <button
+                  type="button"
+                  className="right-button"
+                  ref={rightButton}
+                  onClick={() => {
+                    handleSlider(1, listRef, imgContainer, listIncrement);
+                  }}
+                >
+                  <FontAwesomeIcon icon={faAngleDoubleRight} />
+                </button>
+              }
             </div>
           </div>
           <Footer />
@@ -232,7 +250,7 @@ const Galerie = ({ listImg, catState, categories, setCatState, loaded }) => {
       )}
     </>
   );
-};                                                          
+};
 
 const GalerieStyled = styled.main`
   overflow-y: scroll;
@@ -241,35 +259,39 @@ const GalerieStyled = styled.main`
   }
   .list {
     &::-webkit-scrollbar {
-    width: 0;
-  }
+      width: 0;
+    }
   }
   @media screen and (max-width: 1000px) {
-    
-    .child-img, .child-container, .img-container {
+    .child-img,
+    .child-container,
+    .img-container {
       max-width: calc(100vw - 70px);
     }
-    .left-button , .right-button {
+    .left-button,
+    .right-button {
       display: none;
     }
     .sidebar {
       transition: all 1s ease;
       width: 23px;
-      width: ${props => props.showCat ? '400px' : '23px'};
+      width: ${(props) => (props.showCat ? "400px" : "23px")};
       overflow: hidden;
       position: absolute;
       z-index: 2;
-      height: ${props => props.imgRef !== false ? `${props.imgRefHeight}px` : '100%' };
-      max-width: 200px;
+      height: ${(props) =>
+        props.imgRef !== false ? `${props.imgRefHeight}px` : "100%"};
+      max-width: 80%;
     }
     .list {
       overflow: hidden;
     }
-    h2, .list li {
+    h2,
+    .list li {
       padding-left: 40px;
     }
-    .arrow , .arrow-btn {
-     
+    .arrow,
+    .arrow-btn {
     }
     .arrow {
       transform: scale(200%);
@@ -281,10 +303,13 @@ const GalerieStyled = styled.main`
       position: absolute;
       background-color: transparent;
       cursor: pointer;
-      transform: rotate(${props => props.showCat ? "180deg" : 0}) scale(200%);
-      padding: ${props => props.imgRef !== false ? `${props.imgRefHeight}px` : '100%' } 30px;
-      top: ${props => props.showCat ? "-119vh" : "40vh"} ;
-      right: ${props => props.showCat ? "90%" : ""};
+      transform: rotate(${(props) => (props.showCat ? "180deg" : 0)})
+        scale(200%);
+      padding: ${(props) =>
+          props.imgRef !== false ? `${props.imgRefHeight}px` : "100%"}
+        30px;
+      top: ${(props) => (props.showCat ? "-119vh" : "40vh")};
+      right: ${(props) => (props.showCat ? "90%" : "")};
       z-index: 2;
     }
     .arrow::before {
@@ -326,7 +351,7 @@ const GalerieStyled = styled.main`
       }
     }
     .arrow::before {
-      content:'';
+      content: "";
       display: block;
       background-color: white;
       height: 2px;
@@ -338,7 +363,7 @@ const GalerieStyled = styled.main`
       background: white;
     }
     .arrow::after {
-      content: '';
+      content: "";
       position: relative;
       display: block;
       border: 2px solid white;
@@ -351,17 +376,13 @@ const GalerieStyled = styled.main`
       /* left: 22px; */
       transform: rotate(225deg);
     }
-    
+
     .img-container {
       width: 90vw;
     }
     .categories {
-      
       font-size: 5vh;
-      
     }
-    
-    
   }
   @media screen and (min-width: 1000px) {
     .child {
@@ -370,21 +391,22 @@ const GalerieStyled = styled.main`
     .img-container {
       width: 100%;
       margin: 0 1vw 0 1vw;
-      
     }
     .sidebar {
       width: 100%;
       height: 100%;
       max-width: 240px;
     }
-    
+
     .categories {
       font-size: 6vh;
     }
     .list {
       overflow: auto;
     }
-    .child-img, .child-container, .img-container {
+    .child-img,
+    .child-container,
+    .img-container {
       max-width: calc(100vw - 370px);
     }
   }
@@ -399,29 +421,31 @@ const GalerieStyled = styled.main`
     }
   }
   @media screen and (max-width: 1300px) {
-    .left-button, .right-button {
+    .left-button,
+    .right-button {
       display: none;
     }
     .scroll-img {
       flex-direction: column;
       cursor: grab;
     }
-
+    .categories {
+      font-size: 4vh;
+    }
   }
   @media screen and (max-width: 1750px) {
     .img-container {
       width: 100%;
       margin: 0 50px 0 40px;
     }
-    
-    
-    
+
     .child {
       margin-bottom: 20px;
     }
   }
   @media screen and (max-width: 801px) {
-    .left-button, .right-button {
+    .left-button,
+    .right-button {
       display: none;
     }
   }
@@ -430,7 +454,7 @@ const GalerieStyled = styled.main`
       margin-right: 20px;
     }
     .img-container {
-      max-width: calc(100vw - 500px); 
+      max-width: calc(100vw - 500px);
     }
     .sidebar {
       max-width: 400px;
@@ -441,10 +465,10 @@ const GalerieStyled = styled.main`
       margin-right: 20px;
     }
     .sidebar {
-      max-width: 400px; 
+      max-width: 400px;
     }
     .img-container {
-      max-width: calc(100vw - 500px); 
+      max-width: calc(100vw - 500px);
     }
   }
   @media screen and (min-width: 3000px) {
@@ -452,15 +476,15 @@ const GalerieStyled = styled.main`
       margin-right: 20px;
     }
     .img-container {
-      max-width: calc(100vw - 550px); 
+      max-width: calc(100vw - 550px);
     }
     .sidebar {
       max-width: 400px;
     }
   }
-  
+
   height: calc(100vh - 20%);
-  
+
   .img-container {
     overflow: hidden;
   }
@@ -494,11 +518,11 @@ const GalerieStyled = styled.main`
     display: ${(props) => (props.listIncrement === props.maxRef ? "none" : "")};
   }
   .sidebar,
-  .child-img
-  {
+  .child-img {
     box-shadow: 4px 4px 4px 0px #00000060;
   }
-  .child-container, .child {
+  .child-container,
+  .child {
     background-color: transparent;
   }
   .child {
@@ -519,11 +543,9 @@ const GalerieStyled = styled.main`
     -webkit-appearance: none;
     width: 0;
     display: none;
-    transform: translate3d(0,0,0);
-    
+    transform: translate3d(0, 0, 0);
   }
   .child-img {
-    
     max-width: 100vw;
     height: 100%;
     width: auto;
@@ -540,20 +562,18 @@ const GalerieStyled = styled.main`
   .scroll-img {
     height: 100%;
     display: flex;
-    transform: translate3d(0, 0, 0);  //fix lags on scroll
+    transform: translate3d(0, 0, 0); //fix lags on scroll
     overflow-x: scroll;
-    
-    
-    
+
     position: relative;
-    
+
     width: 100%;
   }
   .img-container {
     float: left;
     height: 100%;
     display: flex;
-    
+
     position: relative;
     padding-right: 5px;
   }
@@ -562,24 +582,21 @@ const GalerieStyled = styled.main`
     position: relative;
     padding: 20px 0 20px 20px;
     height: calc(100vh - 20%);
-   
   }
   .sidebar {
     float: left;
     background-color: #47555e;
-    
-    
+
     display: flex;
     flex-direction: column;
     justify-content: center;
-    
-    
+
     margin-right: 20px;
   }
   .categories {
     display: flex;
     flex-wrap: nowrap;
-    
+
     text-decoration: underline;
     margin: 0 0 0 24px;
     padding-top: 6vh;
@@ -589,13 +606,15 @@ const GalerieStyled = styled.main`
     margin-top: 2vh;
     margin-left: 50px;
     transition: 300ms ease;
-    &:hover {
+  }
+  @media (hover: hover) {
+    .categorie:hover {
       text-decoration: underline;
       transform: scale(150%);
     }
   }
+
   .list li {
-    
     line-height: 3%;
   }
   .categories,
@@ -604,7 +623,6 @@ const GalerieStyled = styled.main`
   }
 
   .list {
-    
     list-style: none;
     padding: 0;
     margin: 4vh 0;

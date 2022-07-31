@@ -351,7 +351,7 @@ const HeaderStyledHome = styled(HeaderStyled)`
     rgba(0, 0, 0, 0) 100%
   );
   box-shadow: none;
-  animation: animateHeader 5s 1 cubic-bezier(0.85, 0.1, 0.9, 0.76); /* 10 */
+  animation: animateHeader 5s 1 cubic-bezier(0.85, 0.1, 0.9, 0.76); 
   @keyframes animateHeader {
     from {
       height: 0px;
@@ -381,7 +381,7 @@ const HeaderStyledHome = styled(HeaderStyled)`
   .logo,
   .fb,
   .insta {
-    animation: animateLink 2s 1 cubic-bezier(0.85, 0.1, 0.9, 0.76);
+    animation: animateLink 4s 1 cubic-bezier(0.85, 0.1, 0.9, 0.76);
   }
   .logo {
     height: 100%;
